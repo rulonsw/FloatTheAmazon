@@ -51,6 +51,7 @@ for word in sw:
 
 
 print df
+
 # TODO: Determine the method of splitting the groups of star reviews (1 - 5) using the attributes from the vectorized data.
 ###Tools used: scikit SVC(Support vector classifier), NLTK's
 # TODO: Maintain persistence between runs by using pickle.
