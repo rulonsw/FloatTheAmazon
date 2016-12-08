@@ -23,21 +23,34 @@ sw = stopwords.words('english')
 
 df = get_df('reviews_cellphones.json.gz')
 
+print "Dropping unneeded data now..."
 df = df.drop(['reviewerID', 'reviewerName', 'helpful', 'unixReviewTime', 'reviewTime'], axis=1)
 
+print "Completed!"
 # This leaves us with just the ASIN, reviewText, overall, and summary
 # Time to clean up the rest!
 
 # to lower case & remove everything but whitespace and words:
-df.summary = df.summary.str.lower().str.replace(r'[^\w\s]', '').str.replace(r'[-_]', '')
-df.reviewText = df.reviewText.str.lower().str.replace(r'[^\w\s]', '').str.replace(r'[-_]', '')
+print "scrubbing summaries and review text..."
+df.summary = df.summary.str.lower().str.replace(r'[^\w\s]', ' ').str.replace(r'[-_]', ' ')
+df.reviewText = df.reviewText.str.lower().str.replace(r'[^\w\s]', ' ').str.replace(r'[-_]', ' ')
 
-#eliminate stopwords:
+print "Completed!"
+
+counter = 0
+
+# eliminate stopwords:
+print "Eliminating stopwords..."
 for word in sw:
-    df.summary = df.summary.str.replace(word, '')
+    counter += 1
+    print "Currently eliminating stopword # {0}".format(counter)
+
+    df.reviewText = df.reviewText.str.replace(r'\b' + word + r'\b', '')
+    df.summary = df.summary.str.replace(r'\b' + word + r'\b', '')
+
+
 
 print df
-# TODO: Eliminate stopwords present in the NLTK english corpus of stopwords.
 # TODO: Determine the method of splitting the groups of star reviews (1 - 5) using the attributes from the vectorized data.
 ###Tools used: scikit SVC(Support vector classifier), NLTK's
 # TODO: Maintain persistence between runs by using pickle.
