@@ -14,6 +14,7 @@ Once all of the data has loaded successfully, you will be able to set the number
 # Using Different Datasets to Train Neural Networks
 If you'd like to use a different dataset to evaluate the effectiveness of MLP and Multinomial NB Classifiers, a large amount of historical Amazon review data is hosted at http://jmcauley.ucsd.edu/data/amazon/ (Due to size constraints, I am unable to upload the Electronics review database along in this Git project). To sample different review data in your Python script, simply download the compressed .json file from Julian McAuley's webpage, store it in your working directory, and follow the example input method outlined in lines 210 - 220 in the program. 
 - IMPORTANT: you'll want to delete all previous .pkl files to ensure your classifiers are trained on the data you've just downloaded. 
+- If you'd like to do multiple validations on one particular version of your MLP Classifier without having to re-create it every time you run this program, just tab-in lines 256-260.
 
 # Tweaking Your Neural Network
 If you'd like to see what effect different variables have on the MLP Classifier (e.g., deeper layers of hidden perceptrons, an increased number of perceptrons per-layer, etc.), edit the stats on line 259. The first number on the MLP Classifier denotes the number of perceptrons per-layer, and the second indicates the depth of the network. 
